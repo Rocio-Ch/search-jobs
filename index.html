@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon Icon -->
     <link rel="shortcut icon" href="./assets/favicon-32x32.png" type="image/x-icon">
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous"
@@ -13,14 +14,16 @@
     <link rel="stylesheet" href="./style/style.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <title>Riot jobs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <!-- Title -->
+    <title>Work With Us | Riot Games</title>
 </head>
-<body class="font-['Manrope'] flex flex-col items-center">
+<body class="h-screen font-['Manrope'] flex flex-col cursor-[url(./assets/mouse.png),_pointer]">
     <header class="w-full py-0.5 px-0.5 text-white bg-black">
         <h1 class="hidden">Riot Games</h1>
         <div class="flex items-center justify-between py-[5px] px-2 lg:w-[80%] lg:m-auto lg:py-3.5 px-4">
             <div>
-                <a href="./index.html" class="flex items-center">
+                <a href="./index.html" class="flex items-center hover:cursor-[url(./assets/mouse3.png),_pointer]">
                     <img src="./assets/icons8-riot-games.svg" alt="Riot games icon" class="w-[35%]">
                     <div class="text-white font-bold text-sm lg:text-base">
                         <p class="mb-[-10px]">RIOT</p>
@@ -31,20 +34,28 @@
             <div class="lg:hidden">
                 <i class="fa-solid fa-bars" id="open-menu"></i>
                 <i class="fa-solid fa-xmark text-[1.2rem] hidden" id="close-menu"></i>
-                <!-- <i class="fa-solid fa-x hidden" id="close-menu"></i> -->
             </div>
             <div id="nav-menu" class="w-full flex flex-col items-end bg-black absolute top-14 left-0 hidden lg:flex lg:static">
                 <nav class="text-end px-2 pb-2.5 lg:px-0 lg:pb-0">
-                    <ul class="text-sm lg:flex">
-                        <a href="./index.html" class="mr-3.5 hover:underline hover:underline-offset-4"><li class="mb-[5px] lg:mb-0"><i class="fa-solid fa-house hidden lg:inline lg:mr-1"></i> Home</li></a>
-                        <a href="#" class="mr-3.5 hover:underline hover:underline-offset-4"><li class="mb-[5px]">Games</li></a>
-                        <a href="#" class="mr-3.5 hover:underline hover:underline-offset-4"><li class="mb-[5px]">About Us</li></a>
-                        <a href="#" class="mr-3.5 hover:underline hover:underline-offset-4"><li class="mb-[5px]">Contact</li></a>
+                    <ul class="text-sm grid mr-1.5 lg:flex">
+                        <a href="./index.html" class="hover:underline hover:underline-offset-4 hover:cursor-[url(./assets/mouse3.png),_pointer] mb-3.5 lg:mr-3.5"><li class="lg:mb-0"><i class="fa-solid fa-house hidden lg:inline lg:mr-1"></i> Home</li></a>
+                        <a href="#" class="hover:underline hover:underline-offset-4 hover:cursor-[url(./assets/mouse3.png),_pointer] mb-3.5 lg:mr-3.5"><li>Games</li></a>
+                        <a href="#" class="hover:underline hover:underline-offset-4 hover:cursor-[url(./assets/mouse3.png),_pointer] mb-3.5 lg:mr-3.5"><li>About Us</li></a>
+                        <a href="#" class="hover:underline hover:underline-offset-4 hover:cursor-[url(./assets/mouse3.png),_pointer] mb-3.5 lg:mr-3.5"><li>Contact</li></a>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
+    <main class="flex flex-col grow">
+        <!-- BANNER -->
+        <section id="banner" class="flex flex-col items-center justify-center h-[300px] lg:h-[600px] bg-[url('./assets/grieta2.jpg')] bg-center bg-no-repeat bg-cover lg:bg-fixed bg-black ">
+            <div class="flex flex-col items-center justify-center lg:flex">
+                <p class="text-[2rem] p1 text-white font-bold md:text-[4rem] lg:text-[6rem]">Work different</p>
+                <p class="text-[2rem] p2 text-white font-bold md:text-[4rem] lg:text-[6rem]">Have fun</p>
+            </div>
+        </section>
+    </main>
     <script src="./app/main.js"></script>
 </body>
 </html>
