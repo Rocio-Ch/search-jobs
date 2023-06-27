@@ -55,6 +55,144 @@
                 <p class="text-[2rem] p2 text-white font-bold md:text-[4rem] lg:text-[6rem]">Have fun</p>
             </div>
         </section>
+        <!-- FILTERS -->
+        <section id="filters" class="bg-black w-[100%] flex flex-col items-center py-4 lg:absolute lg:top-[630px] lg:bg-none lg:bg-transparent">
+            <div class="bg-box w-full filer-box-height lg:w-[60%] flex flex-col lg:shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)] lg:w-[60%] lg:min-w-[648px] lg:h-[150px] lg:rounded-[10px] lg:justify-center lg:items-center">
+                <div class="w-[100%] flex justify-around">
+                    <h2 class="text-white text-[2rem] font-bold">Work with us</h2>
+                </div>
+                <button class="text-white text-xs hover:cursor-[url(./assets/mouse3.png),_pointer]" id="hide-filters">Hide filters <i class="fa-solid fa-chevron-down text-xs"></i></button>
+                <div class="filter-box flex flex-col justify-between lg:flex-row lg:items-center lg:justify-center">
+                    <div class="flex justify-evenly flex-wrap lg:mr-4">
+                        <select name="filter-category" id="filter-category" class="w-[30%] max-w-[60%] min-w-[225px] my-2 mr-2 py-1 px-2 border rounded-[10px] border-[#a9a9a9] focus:border-[#919191] lg:mr-4 hover:cursor-[url(./assets/mouse3.png),_pointer]">
+                            <option value="none" selected>Select category</option>
+                            <option value="area">Area</option>
+                            <option value="position">Position</option>
+                            <option value="gameName">Game</option>
+                            <option value="modality">Modality</option>
+                            <option value="officeLocation">Location</option>
+                        </select>
+                        <select name="category-options" id="category-options" class="w-[30%] max-w-[60%] min-w-[225px] my-2 mr-2 py-1 px-2 border rounded-[10px] border-[#a9a9a9] focus:border-[#919191] hover:cursor-[url(./assets/mouse3.png),_pointer]">
+                            <option value="none" selected>Select an option</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-center mt-2 lg:mt-0 lg:items-center">
+                        <button class="w-[20%] flex justify-center mr-4 py-[0.7rem] px-6 bg-white rounded-[10px] lg:w-[60px] lg:py-[9px] lg:px-2 hover:cursor-[url(./assets/mouse3.png),_pointer]"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button class="w-[20%] flex justify-center py-2 px-6 bg-white rounded-[10px] lg:w-[60px] lg:py-1 lg:px-2 hover:cursor-[url(./assets/mouse3.png),_pointer]">Clear</button>
+                    </div>
+                </div>
+            </div>
+            <button id="add-job" class="hover:scale-105 border border-[#b90606ed] bg-[#b90606ed] text-white py-2.5 px-10 rounded-full mt-[50px] hover:cursor-[url(./assets/mouse3.png),_pointer] shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)] hover:bg-gradient-to-r hover:from-[#a21554] hover:to-[#dc2626]"><i class="fa-solid fa-plus"></i> Add job</button>
+        </section>
+        <!-- RENDER JOBS -->
+        <section class="section-jobs flex justify-center items-center pt-[25px] lg:pt-[250px] bg-[#e2e1de]">
+            <div id="jobs-container" class="w-[80%] flex flex-wrap items-center justify-center">
+            <!-- Render jobs -->
+            </div>
+        </section>
+        <!-- FORM JOB -->
+        <section id="section-form" class="flex flex-col items-center justify-center p-2.5 sm:p-4 lg:p-10 hidden">
+            <div class="flex flex-col items-center justify-center">
+                <p class="text-lg lg:text-[2rem] underline underline-offset-8">Job form</p>
+            </div>
+            <form class="lg:p-10 lg:min-w-[800px] lg:w-[60%] cursor-default">
+                <fieldset class="mt-4 border border-black rounded">
+                    <legend class="font-bold mb-2 ml-4 px-2 text-[#b90606ed]">Job information</legend>
+                    <div class="px-4">
+                        <div class="lg:flex lg:flex-wrap md:justify-between">
+                            <div class="flex flex-col relative mb-3 lg:w-[45%]">
+                                <label class="font-bold mb-1 text-sm lg:text-base" for="job-area">Area</label>
+                                <input class="py-2 px-6 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="job-area">
+                                <i class="fa-regular fa-building absolute bottom-[13px] left-[7px]"></i>
+                                <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                            </div>
+                            <div class="flex flex-col relative mb-3 lg:w-[45%]">
+                                <label class="font-bold mb-2 text-sm lg:text-base" for="job-image">Imagen</label>
+                                <input class="py-2 px-8 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="job-image">
+                                <i class="fa-regular fa-image absolute bottom-[13px] left-[7px]"></i>
+                                <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col mb-3 relative">
+                            <label class="font-bold mb-1 text-sm lg:text-base" for="job-position">Position</label>
+                            <input class="py-2 px-8 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="job-position">
+                            <i class="fa-solid fa-briefcase absolute bottom-[13px] left-[7px]"></i>
+                            <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                        </div>
+                        <div class="flex flex-wrap justify-start">
+                            <div class="flex flex-col mb-3 mr-4 relative lg:min-w-[200px] lg:w-1/5">
+                                <label class="font-bold mb-1 text-sm lg:text-base" for="job-salary">Salary</label>
+                                <input class="py-2 px-6 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="job-salary">
+                                <i class="fa-solid fa-dollar-sign absolute bottom-[13px] left-[7px]"></i>
+                                <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                            </div>
+                            <div class="flex flex-col mb-3 mr-4 relative lg:min-w-[200px] lg:w-1/5">
+                                <label class="font-bold mb-1 text-sm lg:text-base" for="job-modality">Modality</label>
+                                <input class="py-2 px-6 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="job-modality">
+                                <i class="fa-solid fa-house-laptop absolute bottom-[13px] left-[7px]"></i>
+                                <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                            </div>
+                            <div class="flex flex-col mb-3 mr-4 relative lg:min-w-[200px] lg:w-1/5">
+                                <label class="font-bold mb-1 text-sm lg:text-base" for="job-location">Location</label>
+                                <input class="py-2 px-6 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="job-location">
+                                <i class="fa-solid fa-location-dot absolute bottom-[13px] left-[7px]"></i>
+                                <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                            </div>
+                            <div class="flex flex-col mb-3 mr-4 relative lg:min-w-[200px] lg:w-1/5">
+                                <label class="font-bold mb-1 text-sm lg:text-base" for="job-workload">Workload</label>
+                                <input class="py-2 px-6 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="job-workload">
+                                <i class="fa-regular fa-clock absolute bottom-[13px] left-[7px] text-sm"></i>
+                                <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="mt-4 flex border border-black rounded">
+                    <legend class="font-bold mb-2 ml-4 px-2 text-[#b90606ed]">Game info</legend>
+                    <div class="px-4 w-full lg:flex lg:justify-between">
+                        <div class="flex flex-col mb-3 relative lg:w-2/5">
+                            <label class="font-bold mb-1 text-sm lg:text-base" for="game-name">Game</label>
+                            <input class="py-2 px-8 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="game-name">
+                            <i class="fa-solid fa-gamepad absolute bottom-[13px] left-[7px]"></i>
+                            <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                        </div>
+                        <div class="flex flex-col mb-3 relative lg:w-2/5">
+                            <label class="font-bold mb-1 text-sm lg:text-base" for="game-logo">Logo</label>
+                            <input class="py-2 px-8 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="game-logo">
+                            <i class="fa-solid fa-image absolute bottom-[13px] left-[7px]"></i>
+                            <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="mt-4 flex border border-black rounded">
+                    <legend class="font-bold mb-2 ml-4 px-2 text-[#b90606ed]">Specifications</legend>
+                    <div class="px-4 w-full">
+                        <div class="flex flex-col mb-3">
+                            <label class="font-bold mb-1 text-sm lg:text-base" for="job-description">Description</label>
+                            <textarea class="p-2 border border-slate-300 rounded outline-0" name="job-description" id="job-description" cols="30" rows="5" placeholder="Here..."></textarea>
+                            <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                        </div>
+                        <div class="flex flex-col mb-3">
+                            <label class="font-bold mb-1 text-sm lg:text-base" for="job-responsabilities">Responsabilities</label>
+                            <textarea class="p-2 border border-slate-300 rounded outline-0" name="job-responsabilities" id="job-description" cols="30" rows="5" placeholder="Here..."></textarea>
+                            <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                        </div>
+                        <div class="flex flex-col mb-3">
+                            <label class="font-bold mb-1 text-sm lg:text-base" for="job-qualifications">Required qualifications</label>
+                            <textarea class="p-2 border border-slate-300 rounded outline-0" name="job-qualifications" id="job-description" cols="30" rows="5" placeholder="Here..."></textarea>
+                            <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                        </div>
+                        <div class="flex flex-col mb-3">
+                            <label class="font-bold mb-1 text-sm lg:text-base" for="job-perks">Perks</label>
+                            <textarea class="p-2 border border-slate-300 rounded outline-0" name="job-qualifications" id="job-perks" cols="30" rows="5" placeholder="Here..."></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="flex flex-col items-center justify-center">
+                    <button id="submit-job" type="submit" class="border border-transparent bg-[#0d0c0cf7] text-white py-2.5 px-12 rounded mt-2.5 mb-[11px] hover:shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)] hover:cursor-[url(./assets/mouse3.png),_pointer] hover:bg-gradient-to-r hover:from-[#9c0a0a] hover:to-[#dc2626]">Submit</button>
+                </div>
+            </form>
+        </section>
     </main>
     <script src="./app/main.js"></script>
 </body>
