@@ -27,6 +27,7 @@ const removingBlur = (selectors) => {
 const StringToArray = (string) => string.split('.')
 const arrayToString = (array) =>  array.join('.\n')
 
+
 const URL_BASE = "https://64876527beba62972790912f.mockapi.io/jobs/"
 let isSubmit = false
 let filterJobs = []
@@ -146,6 +147,7 @@ const editedJobModal = () => {
     }, 2000)
 }
 
+
 /* FILTERS */
 let filters = {}
 const initializeFilters = (jobs) => {
@@ -165,6 +167,8 @@ const initializeFilters = (jobs) => {
          })
     }
 }
+
+
 
 /* RENDERS */
 const renderJobs = (jobs) => {
@@ -274,7 +278,6 @@ const renderDetailJob = (job) => {
     </article>
     `},2000)
 }
-
 
 
 /* EVENTS */
