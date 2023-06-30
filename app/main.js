@@ -296,6 +296,13 @@ $("#hide-filters").addEventListener("click", () => {
     $(".filer-box-height").classList.toggle("lg:h-[100px]")
 })
 
+$("#job-salary").addEventListener("input", (e) => {
+    const salaryValue = e.target.valueAsNumber
+    if (isNaN(salaryValue)) {
+        $("#job-salary").value = ""
+    }
+})
+
 $("#add-job").addEventListener("click", () => {
     hideElements(["#filters", ".section-jobs", "#banner", "#details-job", "#nav-menu", "#close-menu"])
     showElements(["#section-form", "#open-menu"])
