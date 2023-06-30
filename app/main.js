@@ -380,6 +380,21 @@ $("#category-options").addEventListener("change", () => {
     }
 })
 
+$("#clear-btn").addEventListener("click", () => {
+    let category = $("#filter-category").value
+    let option = $("#category-options").value
+
+    if (category) {
+        $("#filter-category").value = ""
+    }
+
+    if (option) {
+        $("#category-options").value = ""
+        cleanContainer("#category-options")
+    }
+    getJobs()
+})
+
 window.addEventListener("load", () => {
     getJobs()
 })
