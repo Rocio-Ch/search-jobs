@@ -24,7 +24,7 @@
         <div class="flex items-center justify-between py-[5px] px-2 lg:w-[80%] lg:m-auto lg:py-3.5 px-4">
             <div>
                 <a href="./index.html" class="flex items-center hover:cursor-[url(./assets/mouse3.png),_pointer]">
-                    <img src="./assets/icons8-riot-games.svg" alt="Riot games icon" class="w-[35%]">
+                    <img src="./assets/default-logo.svg" alt="Riot games icon" class="w-[35%]">
                     <div class="text-white font-bold text-sm lg:text-base">
                         <p class="mb-[-10px]">RIOT</p>
                         <p>GAMES</p>
@@ -35,13 +35,14 @@
                 <i class="fa-solid fa-bars" id="open-menu"></i>
                 <i class="fa-solid fa-xmark text-[1.2rem] hidden" id="close-menu"></i>
             </div>
-            <div id="nav-menu" class="w-full flex flex-col items-end bg-black absolute top-14 left-0 hidden lg:flex lg:static">
-                <nav class="text-end px-2 pb-2.5 lg:px-0 lg:pb-0">
-                    <ul class="text-sm grid mr-1.5 lg:flex">
+            <div id="nav-menu" class="h-full w-full flex flex-col items-end bg-black absolute top-14 left-0 hidden lg:flex lg:static">
+                <nav class="text-end px-2 z-10 pb-2.5 lg:px-0 lg:pb-0">
+                    <ul class="items-baseline text-sm grid mr-1.5 lg:flex">
                         <a href="./index.html" class="hover:underline hover:underline-offset-4 hover:cursor-[url(./assets/mouse3.png),_pointer] mb-3.5 lg:mr-3.5"><li class="lg:mb-0"><i class="fa-solid fa-house hidden lg:inline lg:mr-1"></i> Home</li></a>
-                        <a href="#" class="hover:underline hover:underline-offset-4 hover:cursor-[url(./assets/mouse3.png),_pointer] mb-3.5 lg:mr-3.5"><li>Games</li></a>
-                        <a href="#" class="hover:underline hover:underline-offset-4 hover:cursor-[url(./assets/mouse3.png),_pointer] mb-3.5 lg:mr-3.5"><li>About Us</li></a>
-                        <a href="#" class="hover:underline hover:underline-offset-4 hover:cursor-[url(./assets/mouse3.png),_pointer] mb-3.5 lg:mr-3.5"><li>Contact</li></a>
+                        <a href="./index.html" class="hover:underline hover:underline-offset-4 hover:cursor-[url(./assets/mouse3.png),_pointer] mb-3.5 lg:mr-3.5"><li>Games</li></a>
+                        <a href="./index.html" class="hover:underline hover:underline-offset-4 hover:cursor-[url(./assets/mouse3.png),_pointer] mb-3.5 lg:mr-3.5"><li>About Us</li></a>
+                        <a href="./index.html" class="hover:underline hover:underline-offset-4 hover:cursor-[url(./assets/mouse3.png),_pointer] mb-3.5 lg:mr-3.5"><li>Contact</li></a>
+                        <button id="add-job" class="hover:scale-105 border border-[#b90606ed] bg-[#b90606ed] text-white py-2.5 px-8 rounded-full hover:cursor-[url(./assets/mouse3.png),_pointer] shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)] hover:bg-gradient-to-r hover:from-[#a21554] hover:to-[#dc2626]"><i class="fa-solid fa-plus"></i> Add job</button>
                     </ul>
                 </nav>
             </div>
@@ -50,9 +51,9 @@
     <main class="flex flex-col grow">
         <!-- BANNER -->
         <section id="banner" class="flex flex-col items-center justify-center h-[300px] lg:h-[600px] bg-[url('./assets/grieta2.jpg')] bg-center bg-no-repeat bg-cover lg:bg-fixed bg-black ">
-            <div class="flex flex-col items-center justify-center lg:flex">
-                <p class="text-[2rem] p1 text-white font-bold md:text-[4rem] lg:text-[6rem]">Work different</p>
-                <p class="text-[2rem] p2 text-white font-bold md:text-[4rem] lg:text-[6rem]">Have fun</p>
+            <div class="flex flex-col items-center justify-center hidden lg:flex">
+                <p class="text-[2rem] md:text-[3rem] p1 text-white font-bold lg:text-[6rem]">Work different</p>
+                <p class="text-[2rem] md:text-[3rem] p2 text-white font-bold lg:text-[6rem]">Have fun</p>
             </div>
         </section>
         <!-- FILTERS -->
@@ -65,28 +66,31 @@
                 <div class="filter-box flex flex-col justify-between lg:flex-row lg:items-center lg:justify-center">
                     <div class="flex justify-evenly flex-wrap lg:mr-4">
                         <select name="filter-category" id="filter-category" class="w-[30%] max-w-[60%] min-w-[225px] my-2 mr-2 py-1 px-2 border rounded-[10px] border-[#a9a9a9] focus:border-[#919191] lg:mr-4 hover:cursor-[url(./assets/mouse3.png),_pointer]">
-                            <option value="none" selected>Select category</option>
+                            <option value="" selected>Select category</option>
                             <option value="area">Area</option>
                             <option value="position">Position</option>
                             <option value="gameName">Game</option>
                             <option value="modality">Modality</option>
                             <option value="officeLocation">Location</option>
+                            <option value="workload">Workload</option>
                         </select>
                         <select name="category-options" id="category-options" class="w-[30%] max-w-[60%] min-w-[225px] my-2 mr-2 py-1 px-2 border rounded-[10px] border-[#a9a9a9] focus:border-[#919191] hover:cursor-[url(./assets/mouse3.png),_pointer]">
-                            <option value="none" selected>Select an option</option>
+                            <option value="" selected>Select an option</option>
                         </select>
                     </div>
                     <div class="flex justify-center mt-2 lg:mt-0 lg:items-center">
-                        <button class="w-[20%] flex justify-center mr-4 py-[0.7rem] px-6 bg-white rounded-[10px] lg:w-[60px] lg:py-[9px] lg:px-2 hover:cursor-[url(./assets/mouse3.png),_pointer]"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        <button class="w-[20%] flex justify-center py-2 px-6 bg-white rounded-[10px] lg:w-[60px] lg:py-1 lg:px-2 hover:cursor-[url(./assets/mouse3.png),_pointer]">Clear</button>
+                        <button id="clear-btn" class="w-[20%] flex justify-center py-2 px-6 bg-white rounded-[10px] lg:w-[60px] lg:py-1 lg:px-2 hover:cursor-[url(./assets/mouse3.png),_pointer]">Clear</button>
                     </div>
                 </div>
             </div>
-            <button id="add-job" class="hover:scale-105 border border-[#b90606ed] bg-[#b90606ed] text-white py-2.5 px-10 rounded-full mt-[50px] hover:cursor-[url(./assets/mouse3.png),_pointer] shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)] hover:bg-gradient-to-r hover:from-[#a21554] hover:to-[#dc2626]"><i class="fa-solid fa-plus"></i> Add job</button>
         </section>
         <!-- RENDER JOBS -->
-        <section class="section-jobs flex justify-center items-center pt-[25px] lg:pt-[250px] bg-[#e2e1de]">
-            <div id="jobs-container" class="w-[80%] flex flex-wrap items-center justify-center">
+        <section class="section-jobs flex flex-col justify-center items-center pt-[25px] pb-[25px] lg:pt-[150px] bg-[#e2e1de]">
+            <!-- Spinner -->
+            <div>
+                <span class="hidden loader"></span>
+            </div>
+            <div id="jobs-container" class="lg:w-[85%] flex flex-wrap items-center justify-center">
             <!-- Render jobs -->
             </div>
         </section>
@@ -95,7 +99,7 @@
             <div class="flex flex-col items-center justify-center">
                 <p class="text-lg lg:text-[2rem] underline underline-offset-8">Job form</p>
             </div>
-            <form class="lg:p-10 lg:min-w-[800px] lg:w-[60%] cursor-default">
+            <form id="form-job" class="lg:p-10 lg:min-w-[800px] lg:w-[60%] cursor-default">
                 <fieldset class="mt-4 border border-black rounded">
                     <legend class="font-bold mb-2 ml-4 px-2 text-[#b90606ed]">Job information</legend>
                     <div class="px-4">
@@ -103,46 +107,45 @@
                             <div class="flex flex-col relative mb-3 lg:w-[45%]">
                                 <label class="font-bold mb-1 text-sm lg:text-base" for="job-area">Area</label>
                                 <input class="py-2 px-6 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="job-area">
-                                <i class="fa-regular fa-building absolute bottom-[13px] left-[7px]"></i>
-                                <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                                <i class="fa-regular fa-building absolute bottom-[32px] left-[7px]"></i>
+                                <p class="invalid-field invisible text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
                             </div>
                             <div class="flex flex-col relative mb-3 lg:w-[45%]">
                                 <label class="font-bold mb-2 text-sm lg:text-base" for="job-image">Imagen</label>
                                 <input class="py-2 px-8 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="job-image">
-                                <i class="fa-regular fa-image absolute bottom-[13px] left-[7px]"></i>
-                                <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                                <i class="fa-regular fa-image absolute bottom-[30px] left-[7px]"></i>
                             </div>
                         </div>
                         <div class="flex flex-col mb-3 relative">
                             <label class="font-bold mb-1 text-sm lg:text-base" for="job-position">Position</label>
                             <input class="py-2 px-8 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="job-position">
-                            <i class="fa-solid fa-briefcase absolute bottom-[13px] left-[7px]"></i>
-                            <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                            <i class="fa-solid fa-briefcase absolute bottom-[32px] left-[7px]"></i>
+                            <p class="invalid-field invisible text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
                         </div>
                         <div class="flex flex-wrap justify-start">
                             <div class="flex flex-col mb-3 mr-4 relative lg:min-w-[200px] lg:w-1/5">
                                 <label class="font-bold mb-1 text-sm lg:text-base" for="job-salary">Salary</label>
                                 <input class="py-2 px-6 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="job-salary">
-                                <i class="fa-solid fa-dollar-sign absolute bottom-[13px] left-[7px]"></i>
-                                <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                                <i class="fa-solid fa-dollar-sign absolute bottom-[32px] left-[7px]"></i>
+                                <p class="invalid-field invisible text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
                             </div>
                             <div class="flex flex-col mb-3 mr-4 relative lg:min-w-[200px] lg:w-1/5">
                                 <label class="font-bold mb-1 text-sm lg:text-base" for="job-modality">Modality</label>
                                 <input class="py-2 px-6 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="job-modality">
-                                <i class="fa-solid fa-house-laptop absolute bottom-[13px] left-[7px]"></i>
-                                <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                                <i class="fa-solid fa-house-laptop absolute bottom-[32px] left-[0px]"></i>
+                                <p class="invalid-field invisible text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
                             </div>
                             <div class="flex flex-col mb-3 mr-4 relative lg:min-w-[200px] lg:w-1/5">
                                 <label class="font-bold mb-1 text-sm lg:text-base" for="job-location">Location</label>
                                 <input class="py-2 px-6 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="job-location">
-                                <i class="fa-solid fa-location-dot absolute bottom-[13px] left-[7px]"></i>
-                                <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                                <i class="fa-solid fa-location-dot absolute bottom-[32px] left-[7px]"></i>
+                                <p class="invalid-field invisible text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
                             </div>
                             <div class="flex flex-col mb-3 mr-4 relative lg:min-w-[200px] lg:w-1/5">
                                 <label class="font-bold mb-1 text-sm lg:text-base" for="job-workload">Workload</label>
                                 <input class="py-2 px-6 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="job-workload">
-                                <i class="fa-regular fa-clock absolute bottom-[13px] left-[7px] text-sm"></i>
-                                <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                                <i class="fa-regular fa-clock absolute bottom-[32px] left-[7px] text-sm"></i>
+                                <p class="invalid-field invisible text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
                             </div>
                         </div>
                     </div>
@@ -160,7 +163,6 @@
                             <label class="font-bold mb-1 text-sm lg:text-base" for="game-logo">Logo</label>
                             <input class="py-2 px-8 text-[#363636] border border-[#dbdbdb] rounded outline-0" type="text" id="game-logo">
                             <i class="fa-solid fa-image absolute bottom-[13px] left-[7px]"></i>
-                            <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
                         </div>
                     </div>
                 </fieldset>
@@ -170,156 +172,112 @@
                         <div class="flex flex-col mb-3">
                             <label class="font-bold mb-1 text-sm lg:text-base" for="job-description">Description</label>
                             <textarea class="p-2 border border-slate-300 rounded outline-0" name="job-description" id="job-description" cols="30" rows="5" placeholder="Here..."></textarea>
-                            <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                            <p class="invalid-field hidden text-[#f14668] text-xs mr-2"><i class="fa-solid fa-circle-exclamation"></i>Empty field</p>
                         </div>
                         <div class="flex flex-col mb-3">
                             <label class="font-bold mb-1 text-sm lg:text-base" for="job-responsabilities">Responsabilities</label>
-                            <textarea class="p-2 border border-slate-300 rounded outline-0" name="job-responsabilities" id="job-description" cols="30" rows="5" placeholder="Here..."></textarea>
-                            <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                            <textarea class="p-2 border border-slate-300 rounded outline-0" name="job-responsabilities" id="job-responsabilities" cols="30" rows="5" placeholder="Here..."></textarea>
+                            <p class="invalid-field hidden text-[#f14668] text-xs mr-2"><i class="fa-solid fa-circle-exclamation"></i>Empty field</p>
                         </div>
                         <div class="flex flex-col mb-3">
                             <label class="font-bold mb-1 text-sm lg:text-base" for="job-qualifications">Required qualifications</label>
-                            <textarea class="p-2 border border-slate-300 rounded outline-0" name="job-qualifications" id="job-description" cols="30" rows="5" placeholder="Here..."></textarea>
-                            <p class="invalid-field hidden text-[#f14668] text-sm">Empty field <i class="fa-solid fa-circle-exclamation"></i></p>
+                            <textarea class="w-[95%] mr-2.5 p-2 border border-slate-300 rounded outline-0" name="job-qualifications" id="job-qualifications" cols="30" rows="5" placeholder="Each benefit must be separated by a period."></textarea>
+                            <p class="invalid-field hidden text-[#f14668] text-xs mr-2"><i class="fa-solid fa-circle-exclamation"></i>Empty field</p>
+                            <p class="alert-qualifications hidden text-xs mt-2"><i class="fa-solid fa-circle-info mr-2"></i>Each benefit must be separated by a period, except the last one</p>
                         </div>
                         <div class="flex flex-col mb-3">
                             <label class="font-bold mb-1 text-sm lg:text-base" for="job-perks">Perks</label>
-                            <textarea class="p-2 border border-slate-300 rounded outline-0" name="job-qualifications" id="job-perks" cols="30" rows="5" placeholder="Here..."></textarea>
+                            <textarea class="p-2 border border-slate-300 rounded outline-0" name="job-perks" id="job-perks" cols="30" rows="5" placeholder="Each benefit must be separated by a period."></textarea>
+                            <p class="alert-perks hidden text-xs mb-2.5 mt-2"><i class="fa-solid fa-circle-info mr-2"></i>Each benefit must be separated by a period, except the last one</p>
                         </div>
                     </div>
                 </fieldset>
-                <div class="flex flex-col items-center justify-center">
-                    <button id="submit-job" type="submit" class="border border-transparent bg-[#0d0c0cf7] text-white py-2.5 px-12 rounded mt-2.5 mb-[11px] hover:shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)] hover:cursor-[url(./assets/mouse3.png),_pointer] hover:bg-gradient-to-r hover:from-[#9c0a0a] hover:to-[#dc2626]">Submit</button>
+                <div class="flex items-center justify-evenly mt-3.5">
+                    <a href="./index.html" id="cancel-btn" type="submit" class="bg-[#0d0c0cf7] text-white py-2.5 px-6 md:px-12 rounded mt-2.5 mb-[11px] hover:shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)] hover:cursor-[url(./assets/mouse3.png),_pointer] hover:bg-gradient-to-r hover:from-[#9c0a0a] hover:to-[#dc2626]">Cancel</a>
+                    <button id="submit-job-btn" type="submit" class="border border-transparent bg-[#0d0c0cf7] text-white py-2.5 px-6 md:px-12 rounded mt-2.5 mb-[11px] hover:shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)] hover:cursor-[url(./assets/mouse3.png),_pointer] hover:bg-gradient-to-r hover:from-[#1a7780] hover:to-[#0a9907]">Submit</button>
+                    </div>
                 </div>
             </form>
         </section>
         <!-- RERNDER JOB DETAILS INFORMATION -->
-        <section id="edit-job-container" class="flex flex-col bg-[url('./assets/wave.svg')] bg-bottom bg-no-repeat">
-            <div class="flex flex-col bg-[url('./assets/wave2.svg')] bg-top bg-no-repeat">
-                <article class="flex flex-col justify-center items-center pt-[50px] pb-[30px] px-[30px] sm:w-[70%] lg:w-[60%] sm:self-center sm:border-l sm:border-black">
-                    <div class="self-start sm:flex sm:flex-wrap sm:items-center">
-                        <div class="w-[260px] sm:w-[300px] mb-2 sm:pr-2.5 sm:border-r sm:border-black">
-                            <img class="" src="https://www.gamerfocus.co/wp-content/uploads/2020/10/lol-kda-gamerfocus.jpg" alt="kda ">
-                        </div>
-                        <ul class="sm:ml-2.5">
-                            <li class="font-bold text-black mb-2.5">Area: <span class="text-[#b90606ed]"> Audio</span></li>
-                            <li class="font-bold text-black mb-2.5">Position: <span class="text-[#b90606ed]"> Sound Design Lead</span></li>
-                            <li class="font-bold text-black mb-2.5">Game: <span class="text-[#b90606ed]"> League of Legends: Wild Rift</span></li>
-                        </ul>
-                    </div>
-                    <div class="flex flex-col justify-center py-2.5">
-                        <span class="font-bold text-black">Description:</span>
-                        <p class="pb-2.5 mb-2.5 border-b border-black text-justify">As Sound Design Lead, you will own the sonic experience across all of Wild Rift, globally. You will guide and oversee external teams to develop Wild Rift's own unique and iconic sound. Through your close partnerships with Riot and Tencent stakeholders and developers, you will ensure that Wild Rift delivers a cohesive and resonant experience for players. You will report into the Creative Director.</p>
-                        <span class="font-bold text-black">Responsabilities:</span>
-                        <p class="pb-2.5 mb-2.5 border-b border-black text-justify">Uphold the sonic expression of the League of Legends IP, Supervise each segment of the audio pipeline for sound design, music and voice over, Partner with Riot LAX partners and Tencent developers on thematically cohesive sounds, music and voice over for cross-game tentpole moments, Act as a liaison to advocate for audio to the engineering staff, and partner with team members across disciplines to find solutions that best support quality audio.</p>
-                        <span class="font-bold text-black">Required qualifications:</span>
-                        <ul class="border-b border-black pb-2.5 mb-2.5 px-[25px] list-disc">
-                            <li>5+ years experience developing audio for games</li>
-                            <li>3+ years experience working in a leadership capacity</li>
-                            <li>Expertise in the holistic game audio process</li>
-                            <li>Exceptional Wwise or Fmod implementation skills, Knowledge of sound design creation tools (i.e. - ProTools, Nuendo, Reaper, Izotope, Waves, Native Instruments) and techniques</li>
-                            <li>Knowledge of audio middleware (i.e. - Wwise, Fmod, Miles) and overall game engine technology (i.e. - Unreal, Unity, Lumberyard)</li>
-                            <li>perience working with external developers</li>
-                            <li>Fluency in English</li>
-                        </ul>
-                        <span class="font-bold text-black">Our perks:</span>
-                        <ul class="border-b border-black pb-2.5 mb-2.5 px-[25px] list-disc">
-                            <li>Full relocation support</li>
-                            <li>Full health insurance for you, your spouse, and children</li>
-                            <li>Open paid time off</li>
-                            <li>Retirement benefits with company matching</li>
-                            <li>Life insurance, parental leave, plus short-term and long-term disability</li>
-                            <li>Play Fund so you can broaden and deepen your knowledge of our players and community through games</li>
-                            <li>We will double down on your donations of time and money to non-profits</li>
-                        </ul>
-                        <div class="sm:flex sm:flex-wrap border-b border-black pb-2.5">
-                            <div class="mb-2.5 sm:mr-[80px] sm:mb-0">
-                                <div class="mb-2.5">
-                                    <span><i class="fa-solid fa-house-laptop mr-1"></i>Presential</span>
-                                </div>
-                                <div class="mb-2.5 sm:mb-0">
-                                    <span><i class="fa-solid fa-dollar-sign mr-1"></i>485800</span>
-                                </div>
-                            </div>
-                            <div class="mb-2.5 sm:mr-[80px] sm:mb-0">
-                                <div class="mb-2.5">
-                                    <span><i class="fa-regular fa-clock mr-1"></i>Full time</span>
-                                </div>
-                                <div class="mb-2.5 sm:mb-0">
-                                    <span><i class="fa-solid fa-location-dot mr-1"></i>Shangai, China</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-[260px] mt-[30px] flex justify-between">
-                            <button id="edit-job-btn" class="border border-transparent bg-[#0d0c0cf7] text-white py-2.5 px-12 rounded mt-2.5 mb-[11px] hover:cursor-[url(./assets/mouse3.png),_pointer] hover:bg-gradient-to-r hover:from-[#1a7780] hover:to-[#0a9907] hover:shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)]">Edit</button>
-                            <button id="modal-delete-job-btn" class="border border-transparent bg-[#0d0c0cf7] text-white py-2.5 px-12 rounded mt-2.5 mb-[11px] hover:cursor-[url(./assets/mouse3.png),_pointer] hover:bg-gradient-to-r hover:from-[#9c0a0a] hover:to-[#dc2626] hover:shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)]"><i class="fa-solid fa-trash"></i></button>
-                        </div>
-                    </div>
-                </article>
+        <section id="details-job" class="hidden flex flex-col bg-[url('./assets/wave2.svg')] bg-top bg-no-repeat">
+            <div class="flex flex-col items-center py-10 hidden spinner-container">
+                <span id="detail-spinner" class="spinner"></span>
+            </div>
+            <div id="details-job-container" class="flex flex-col bg-[url('./assets/wave.svg')] bg-bottom bg-no-repeat">
+                
             </div>
         </section>
     </main>
     <!-- modal window added job -->
-    <div class="hidden drop-shadow-[0_0_0.75rem_rgb(255,255,255)] fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster shadow-[0_0_11px_0px_rgba(74,74,74,75%)]" id="modal-added-job">
+    <div class="hidden drop-shadow-[0_0_0.75rem_rgb(0,0,0)] fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" id="modal-added-job">
         <div class="w-[300px] h-[165px] lg:w-[400px] px-3.5 py-3.5 text-[#4a4a4a] rounded bg-white">
             <div class="h-full flex flex-col justify-evenly">
                 <div class="flex items-center justify-center">
-                    <img src="./assets/verified.gif" alt="Animated icon checked" class="w-[20%]">
+                    <img src="./assets/checked.gif" alt="Animated icon checked" class="w-[20%]">
                 </div>
                 <p class="text-base lg:text-[1.3rem] text-center mx-10">Added succesffuly</p>
             </div>
         </div>
     </div>
     <!-- modal window edited job -->
-    <div class="hidden drop-shadow-[0_0_0.75rem_rgb(255,255,255)] fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster shadow-[0_0_11px_0px_rgba(74,74,74,75%)]" id="modal-edited-job">
+    <div class="hidden drop-shadow-[0_0_0.75rem_rgb(0,0,0)] fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" id="modal-edited-job">
         <div class="w-[300px] h-[165px] lg:w-[400px] px-3.5 py-3.5 text-[#4a4a4a] rounded bg-white">
             <div class="h-full flex flex-col justify-evenly">
                 <div class="flex items-center justify-center">
-                    <img src="./assets/verified.gif" alt="Animated icon checked" class="w-[20%]">
+                    <img src="./assets/checked.gif" alt="Animated icon checked" class="w-[20%]">
                 </div>
                 <p class="text-base lg:text-[1.3rem] text-center mx-10">Edited succesffuly</p>
             </div>
         </div>
     </div>
     <!-- modal window delete job -->
-    <div class="hidden drop-shadow-[0_0_0.75rem_rgb(255,255,255)] fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster shadow-[0_0_11px_0px_rgba(74,74,74,75%)]" id="modal-delete-job">
+    <div class="hidden drop-shadow-[0_0_0.75rem_rgb(0,0,0)] fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" id="delete-job">
         <div class="w-[300px] h-[250px] lg:w-[450px] px-3.5 py-3.5 text-[#4a4a4a] rounded bg-white">
             <div class="h-full flex flex-col justify-evenly">
                 <div class="flex items-center justify-center">
-                    <img src="./assets/bin-animated.gif" alt="Animated icon delete" class="w-[20%]">
+                    <img src="./assets/delete-icon.jpg" alt="Animated icon delete" class="w-[15%] animate-bounce">
                 </div>
-                <p class="text-base lg:text-[1.3rem] text-center mx-10">Are you sure you want to delete this job card?</p>
+                <p class="text-base lg:text-[1.3rem] text-center mx-10">Are you sure you want to delete this job?</p>
                 <div class="flex justify-center mt-2">
-                    <button id="operation-edited-btn" class="border border-transparent bg-[#0d0c0cf7] text-white px-4 py-2 lg:px-6 rounded m-2 mb-[11px] hover:cursor-[url(./assets/mouse3.png),_pointer] hover:bg-gradient-to-r hover:from-[#1a7780] hover:to-[#0a9907] hover:shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)]"><i class="fa-solid fa-check"></i></button>
-                    <button id="operation-edited-btn" class="border border-transparent bg-[#0d0c0cf7] text-white px-4 py-2 lg:px-6 rounded m-2 mb-[11px] hover:cursor-[url(./assets/mouse3.png),_pointer] hover:bg-gradient-to-r hover:from-[#9c0a0a] hover:to-[#dc2626] hover:shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)]"><i class="fa-solid fa-xmark"></i></button>
+                    <button id="cancel-delete-job-btn" class="border border-transparent bg-[#0d0c0cf7] text-white px-5 py-2 lg:mr-[50px] lg:px-8 lg:px-6 rounded m-2 mb-[11px] hover:cursor-[url(./assets/mouse3.png),_pointer] hover:bg-gradient-to-r hover:from-[#9c0a0a] hover:to-[#dc2626] hover:shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)]"><i class="fa-solid fa-xmark"></i></button>
+                    <button id="delete-job-btn" class="border border-transparent bg-[#0d0c0cf7] text-white px-4 py-2 lg:px-8 rounded m-2 mb-[11px] hover:cursor-[url(./assets/mouse3.png),_pointer] hover:bg-gradient-to-r hover:from-[#1a7780] hover:to-[#0a9907] hover:shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)]"><i class="fa-solid fa-check"></i></button>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Page Up -->
+    <div class="text-[#b90606ed] inline fixed bottom-[10px] py-[5px] px-2.5 m-2.5 text-base right-0 bg-white rounded-full lg:bottom-0 lg:m-[25px] lg:py-2 lg:px-3 lg:text-2xl shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)]">
+        <a href="#top" class="hover:cursor-[url(./assets/mouse3.png),_pointer]"><i class="fa-solid fa-chevron-up"></i></a>
+    </div>
     <footer class="bg-[#252423]">
-        <div class="w-full flex items-center flex-wrap justify-evenly lg:justify-between pt-[5px] px-2 text-[#8a8887] lg:w-[80%] lg:m-auto lg:pt-2 lg:pb-2 px-4">
-            <div>
+        <div class="w-full flex flex-wrap justify-evenly lg:justify-between pt-[5px] px-2 text-[#8a8887] lg:w-[80%] lg:m-auto">
+            <div class="flex items-center">
                 <a href="./index.html" class="w-[40px] flex items-center hover:cursor-[url(./assets/mouse3.png),_pointer]">
-                    <img src="./assets/icons8-riot-games.svg" alt="Riot games icon">
+                    <img src="./assets/default-logo.svg" alt="Riot games icon">
                     <div class="hidden lg:flex lg:flex-col text-[#8a8887] font-bold text-sm">
                         <p class="mb-[-5px]">RIOT</p>
                         <p>GAMES</p>
                     </div>
                 </a>
+                <ul class="flex items-center flex-wrap text-xs m-2.5 py-2.5 border-l border-[#8a8887] items-end lg:text-sm lg:ml-[70px]">
+                    <a href="./index.html" class="ml-2.5 hover:cursor-[url(./assets/mouse3.png),_pointer]"><li>LEGAL</li></a>
+                    <a href="./index.html" class="ml-2.5 hover:cursor-[url(./assets/mouse3.png),_pointer]"><li>TERMS OF SERVICE</li></a>
+                    <a href="#" class="ml-2.5 hover:cursor-[url(./assets/mouse3.png),_pointer]"><li>SECURITY</li></a>
+                </ul>
             </div>
-            <ul class="flex flex-wrap text-xs lg:text-sm">
-                <a href="#" class="ml-2.5 hover:cursor-[url(./assets/mouse3.png),_pointer]"><li>LEGAL</li></a>
-                <a href="#" class="ml-2.5 hover:cursor-[url(./assets/mouse3.png),_pointer]"><li>TERMS OF SERVICE</li></a>
-                <a href="#" class="ml-2.5 hover:cursor-[url(./assets/mouse3.png),_pointer]"><li>SECURITY</li></a>
-            </ul>
-            <ul class="flex flex-wrap text-sm lg:text-base">
-                <a href="#" class="ml-6 hover:cursor-[url(./assets/mouse3.png),_pointer]"><li><i class="fa-brands fa-twitter"></i></li></a>
-                <a href="#" class="ml-6 hover:cursor-[url(./assets/mouse3.png),_pointer]"><li><i class="fa-brands fa-twitch"></i></li></a>
-                <a href="#" class="ml-6 hover:cursor-[url(./assets/mouse3.png),_pointer]"><li><i class="fa-brands fa-youtube"></i></li></a>
-                <a href="#" class="ml-6 hover:cursor-[url(./assets/mouse3.png),_pointer]"><li><i class="fa-brands fa-linkedin-in"></i></li></a>
+            <ul class="flex flex-wrap items-center text-sm lg:text-base">
+                <a href="./index.html" class="ml-6 hover:cursor-[url(./assets/mouse3.png),_pointer]"><li><i class="fa-brands fa-twitter"></i></li></a>
+                <a href="./index.html" class="ml-6 hover:cursor-[url(./assets/mouse3.png),_pointer]"><li><i class="fa-brands fa-twitch"></i></li></a>
+                <a href="./index.html" class="ml-6 hover:cursor-[url(./assets/mouse3.png),_pointer]"><li><i class="fa-brands fa-youtube"></i></li></a>
+                <a href="./index.html" class="ml-6 hover:cursor-[url(./assets/mouse3.png),_pointer]"><li><i class="fa-brands fa-linkedin-in"></i></li></a>
             </ul>
         </div>
+        <div class="flex flex-col justify-center items-center">
+            <p class="bg-[#252423] text-[#8a8887] p-2 text-xs">Rocio Magali Chaparro | © 2023</p>
+        </div>
     </footer>
-    <script src="./app/main.js"></script>
+    <script src="./app/mainV2.js"></script>
 </body>
 </html>
+
