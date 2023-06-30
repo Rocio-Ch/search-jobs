@@ -277,6 +277,7 @@ const renderDetailJob = (job) => {
 
 
 
+/* EVENTS */
 $("#open-menu").addEventListener("click", () => {
     hideElements(["#open-menu"])
     showElements(["#nav-menu", "#close-menu"])
@@ -290,16 +291,94 @@ $("#close-menu").addEventListener("click", () => {
 $("#hide-filters").addEventListener("click", () => {
     $(".filter-box").classList.toggle("hidden")
     $(".filer-box-height").classList.toggle("lg:h-[100px]")
-    $(".section-jobs").classList.toggle("lg:pt-[200px]")
 })
 
 $("#add-job").addEventListener("click", () => {
-    hideElements(["#filters", ".section-jobs", "#banner"])
-    showElements(["#section-form"])
+    hideElements(["#filters", ".section-jobs", "#banner", "#details-job", "#nav-menu", "#close-menu"])
+    showElements(["#section-form", "#open-menu"])
     window.scrollTo(0, 0)
+    isSubmit = true
     setFocus("#job-area")
+    saveJob()
 })
 
+$("#form-job").addEventListener("submit", (e) => {
+    e.preventDefault()
+    if (isSubmit) {
+        openCreatedJobModal()
+        registerJob()
+    } else {
+        editedJobModal()
+        const jobId = $("#edit-job-btn").getAttribute("data-id")
+        editJob(jobId)
+    }
+    $("#form-job").reset()
+})
+
+$("#delete-job-btn").addEventListener("click", () => {
+    removingBlur(["header", "main", "footer"])
+    const jobId = $("#delete-job-btn").getAttribute("data-id")
+    deleteJob(jobId)
+})
+
+$("#cancel-delete-job-btn").addEventListener("click", () => {
+    removingBlur(["header", "main", "footer"])
+    hideElements(["#delete-job"])
+})
+
+$("#filter-category").addEventListener("change", () => {
+    cleanContainer("#category-options")
+    let selectedCategory = $("#filter-category").value
+    options = filters[selectedCategory]
+    $("#category-options").innerHTML += `
+        <option value="">Select an option</option>
+    `  
+    for (const option of options) {
+        $("#category-options").innerHTML += `
+            <option value="${option}">${option}</option>
+        `        
+    }
+})
+
+$("#category-options").addEventListener("change", () => {
+    let option = $("#category-options").value
+    let selectedCategory = $("#filter-category").value
+    if (selectedCategory == "area") {
+        const result = filterJobs.filter(job => job.job.area == option)
+        renderJobs(result)
+        return
+    }
+
+    if (selectedCategory == "position") {
+        const result = filterJobs.filter(job => job.job.position == option)
+        renderJobs(result)
+        return
+    }  
+
+    if (selectedCategory == "gameName") {
+        const result = filterJobs.filter(job => job.gameInfo.gameName == option)
+        renderJobs(result)
+        return
+    }
+
+    if (selectedCategory == "modality") {
+        const result = filterJobs.filter(job => job.modality == option)
+        renderJobs(result)
+        return
+    }
+
+    if (selectedCategory == "officeLocation") {
+        const result = filterJobs.filter(job => job.officeLocation == option)
+        renderJobs(result)
+        return
+    }
+
+    if (selectedCategory == "workload") {
+        const result = filterJobs.filter(job => job.workload == option)
+        renderJobs(result)
+        return
+    }
+})
 
 window.addEventListener("load", () => {
     getJobs()
