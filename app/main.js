@@ -77,6 +77,53 @@ const deleteJob = (jobId) => {
     }).finally(() => window.location.reload())
 }
 
+const saveJob = () => {
+    return {
+    "job": {
+        "area": $("#job-area").value,
+        "position": $("#job-position").value
+        },
+        "gameInfo": {
+            "gameName": $("#game-name").value,
+            "gameLogo": $("#game-logo").value
+        },
+        "salary": $("#job-salary").value,
+        "description": $("#job-description").value,
+        "responsabilities": $("#job-responsabilities").value,
+        "image": $("#job-image").value,
+        "modality": $("#job-modality").value,
+        "workload": $("#job-workload").value,
+        "officeLocation": $("#job-location").value,
+        "requiredQualifications": StringToArray($("#job-qualifications").value),
+        "perks": StringToArray($("#job-perks").value)
+    }
+}
+
+const populateForm = ({ job: { area, position }, gameInfo: { gameName, gameLogo }, salary, description, responsabilities, requiredQualifications, image, modality, workload, officeLocation, perks }) => {
+    $("#job-area").value = area
+    $("#job-image").value = image
+    $("#job-position").value = position
+    $("#job-salary").value = salary
+    $("#job-modality").value = modality
+    $("#job-location").value = officeLocation
+    $("#job-workload").value = workload
+    $("#game-name").value = gameName
+    $("#game-logo").value = gameLogo
+    $("#job-description").value = description
+    $("#job-responsabilities").value = responsabilities
+    $("#job-perks").value = arrayToString(perks)
+    $("#job-qualifications").value = arrayToString(requiredQualifications)
+}
+
+const editingJob = (jobId) => {
+    hideElements(["#filters", ".section-jobs", "#banner", "#details-job"])
+    showElements(["#section-form", ".alert-qualifications", ".alert-perks"])
+    window.scrollTo(0, 0)
+    isSubmit = false
+    setFocus("#job-area")
+    getJobs(jobId)
+}
+
 /* RENDERS */
 const renderJobs = (jobs) => {
     cleanContainer("#jobs-container")
