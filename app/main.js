@@ -1,33 +1,31 @@
-// selectores universales
 const $ = (selector) => document.querySelector(selector)
 const $$ = (selector) => document.querySelectorAll(selector)
+const setFocus = (selector) => $(selector).focus()
+const cleanContainer = (selector) => $(selector).innerHTML = ''
 
-//hide elements 
 const hideElements = (selectors) => {
     for (const selector of selectors) {
         $(selector).classList.add("hidden")
     }
 }
-//show elements
 const showElements = (selectors) => {
     for (const selector of selectors) {
         $(selector).classList.remove("hidden")
     }
 }
-// adding brightness 
-const addingBrigthness = (selectors) => {
+const addingBlur = (selectors) => {
     for (const selector of selectors) {
-        $(selector).style.filter = ("brightness(0.5)")
+        $(selector).style.filter = ("blur(1px)")
     }
 }
-// removing brightness 
-const removingBrigthness = (selectors) => {
+const removingBlur = (selectors) => {
     for (const selector of selectors) {
-        $(selector).style.filter = ("brightness()")
+        $(selector).style.filter = ("blur(0px)")
     }
 }
-//apply autofocus
-const setFocus = (selector) => $(selector).focus()
+
+const StringToArray = (string) => string.split('.')
+const arrayToString = (array) =>  array.join('.\n')
 
 
 $("#open-menu").addEventListener("click", () => {
