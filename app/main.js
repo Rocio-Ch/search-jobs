@@ -124,6 +124,28 @@ const editingJob = (jobId) => {
     getJobs(jobId)
 }
 
+const openDeleteModal = (id) => {
+    showElements(["#delete-job"])
+    $("#delete-job-btn").setAttribute("data-id", id)
+    addingBlur(["header", "main", "footer"])
+}
+
+const openCreatedJobModal = () => {
+    showElements(["#modal-added-job"])
+    setTimeout(() => {
+        hideElements(["#modal-added-job"])
+        window.location.reload()
+    }, 2000)
+}
+
+const editedJobModal = () => {
+    showElements(["#modal-edited-job"])
+    setTimeout(() => {
+        hideElements(["#modal-edited-job"])
+        window.location.reload()
+    }, 2000)
+}
+
 /* RENDERS */
 const renderJobs = (jobs) => {
     cleanContainer("#jobs-container")
