@@ -45,6 +45,38 @@ const getJobs = (jobId = "") => {
         })
 }
 
+const getJobDetails = (jobId) => {
+    fetch(`${URL_BASE}${jobId}`)
+        .then(res => res.json())
+        .then(jobs => renderDetailJob(jobs))
+}
+
+const registerJob = () => {
+    fetch(`${URL_BASE}`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'Application/json'
+        },
+        body: JSON.stringify(saveJob())
+    })
+}
+
+const editJob = (jobId) => {
+    fetch(`${URL_BASE}${jobId}`, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'Application/json'
+        },
+        body: JSON.stringify(saveJob())
+    })
+}
+
+const deleteJob = (jobId) => {
+    fetch(`${URL_BASE}${jobId}`, {
+        method: "DELETE"
+    }).finally(() => window.location.reload())
+}
+
 /* RENDERS */
 const renderJobs = (jobs) => {
     cleanContainer("#jobs-container")
