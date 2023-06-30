@@ -27,42 +27,23 @@ const removingBlur = (selectors) => {
 const StringToArray = (string) => string.split('.')
 const arrayToString = (array) =>  array.join('.\n')
 
+const URL_BASE = "https://64876527beba62972790912f.mockapi.io/jobs/"
+let isSubmit = false
+let filterJobs = []
 
-$("#open-menu").addEventListener("click", () => {
-    hideElements(["#open-menu"])
-    showElements(["#nav-menu", "#close-menu"])
-})
-
-$("#close-menu").addEventListener("click", () => {
-    hideElements(["#nav-menu", "#close-menu"])
-    showElements(["#open-menu"])
-})
-
-$("#hide-filters").addEventListener("click", () => {
-    $(".filter-box").classList.toggle("hidden")
-    $(".filer-box-height").classList.toggle("lg:h-[100px]")
-    $(".section-jobs").classList.toggle("lg:pt-[200px]")
-})
-
-$("#add-job").addEventListener("click", () => {
-    hideElements(["#filters", ".section-jobs", "#banner"])
-    showElements(["#section-form"])
-    window.scrollTo(0, 0)
-    setFocus("#job-area")
-})
-
-
-
-const URL_BASE = "https://64876527beba62972790912f.mockapi.io/jobs"
-
-
-const getJobs = () => {
-    fetch(`${URL_BASE}`)
+const getJobs = (jobId = "") => {
+    fetch(`${URL_BASE}${jobId}`)
         .then(res => res.json())
-        .then(jobs => renderJobs(jobs))
+        .then(jobs => {
+            if (jobId === "") {
+                filterJobs = jobs
+                renderJobs(jobs)
+                initializeFilters(jobs)
+            } else {
+                populateForm(jobs)
+            }
+        })
 }
-
-/* ${} */
 
 const renderJobs = (jobs) => {
     if (jobs) {
@@ -93,7 +74,28 @@ const renderJobs = (jobs) => {
 }
 
 
+$("#open-menu").addEventListener("click", () => {
+    hideElements(["#open-menu"])
+    showElements(["#nav-menu", "#close-menu"])
+})
 
+$("#close-menu").addEventListener("click", () => {
+    hideElements(["#nav-menu", "#close-menu"])
+    showElements(["#open-menu"])
+})
+
+$("#hide-filters").addEventListener("click", () => {
+    $(".filter-box").classList.toggle("hidden")
+    $(".filer-box-height").classList.toggle("lg:h-[100px]")
+    $(".section-jobs").classList.toggle("lg:pt-[200px]")
+})
+
+$("#add-job").addEventListener("click", () => {
+    hideElements(["#filters", ".section-jobs", "#banner"])
+    showElements(["#section-form"])
+    window.scrollTo(0, 0)
+    setFocus("#job-area")
+})
 
 
 window.addEventListener("load", () => {
