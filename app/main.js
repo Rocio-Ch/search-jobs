@@ -146,6 +146,26 @@ const editedJobModal = () => {
     }, 2000)
 }
 
+/* FILTERS */
+let filters = {}
+const initializeFilters = (jobs) => {
+    filters = {
+        "area": [],
+        "position": [],
+        "gameName": [],
+        "modality": [],
+        "officeLocation": [],
+        "workload": []
+    }
+    for (const { gameInfo: { gameName }, job: { position, area }, modality, workload, officeLocation } of jobs) {
+        Object.keys(filters).forEach((key) => {
+            if (!filters[key].includes(eval(key))) {
+                filters[key].push(eval(key))
+            }    
+         })
+    }
+}
+
 /* RENDERS */
 const renderJobs = (jobs) => {
     cleanContainer("#jobs-container")
