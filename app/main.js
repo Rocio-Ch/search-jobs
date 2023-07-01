@@ -2,6 +2,10 @@ const $ = (selector) => document.querySelector(selector)
 const $$ = (selector) => document.querySelectorAll(selector)
 const setFocus = (selector) => $(selector).focus()
 const cleanContainer = (selector) => $(selector).innerHTML = ''
+const scrollTop =  () =>  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+})
 
 const addClass = (selectors) => {
     for (const selector of selectors) {
@@ -130,8 +134,8 @@ const populateForm = ({ job: { area, position }, gameInfo: { gameName, gameLogo 
 
 const editingJob = (jobId) => {
     hideElements(["#filters", ".section-jobs", "#banner", "#details-job"])
-    showElements(["#section-form", ".alert-qualifications", ".alert-perks"])
-    window.scrollTo(0, 0)
+    showElements(["#section-form"])
+    scrollTop()
     isSubmit = false
     setFocus("#job-area")
     getJobs(jobId)
@@ -192,7 +196,7 @@ const validateForm = () => {
         {'selector':$("#game-name"), 'invalidSelector':"#invalid-gameName", 'minLenght':4, 'validationFunction': validateStrField},
         {'selector':$("#job-description"), 'invalidSelector':"#invalid-description", 'minLenght':125, 'validationFunction': validateStrField},
         {'selector':$("#job-responsabilities"), 'invalidSelector':"#invalid-responsabilities", 'minLenght':125, 'validationFunction': validateStrField},
-        
+        {'selector':$("#job-qualifications"), 'invalidSelector':"#invalid-qualifications", 'minLenght':125, 'validationFunction': validateStrField}
     ]
 
     isValid = true
@@ -263,7 +267,6 @@ const renderJobs = (jobs) => {
 const renderDetailJob = (job) => {
     hideElements(["#banner", "#filters", ".section-jobs"])
     showElements(["#details-job", ".spinner-container"])
-    window.scrollTo(0, 0)
     setTimeout(() => {
         hideElements([".spinner-container"])
     const { job: { area, position }, gameInfo: { gameName }, salary, description, responsabilities, requiredQualifications, image, modality, workload, officeLocation, perks, id } = job
@@ -355,7 +358,6 @@ $("#hide-filters").addEventListener("click", () => {
 $("#add-job").addEventListener("click", () => {
     hideElements(["#filters", ".section-jobs", "#banner", "#details-job", "#nav-menu", "#close-menu"])
     showElements(["#section-form", "#open-menu"])
-    window.scrollTo(0, 0)
     isSubmit = true
     setFocus("#job-area")
 })
@@ -372,6 +374,8 @@ $("#form-job").addEventListener("submit", (e) => {
             editJob(jobId)
         }
         $("#form-job").reset()
+    } else {
+        scrollTop()
     }
 })
 
