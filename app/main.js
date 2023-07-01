@@ -237,7 +237,7 @@ const renderJobs = (jobs) => {
                 $("#jobs-container").innerHTML += `
                 <div class="card w-[290px] lg:w-[300px] bg-white border border-slate-500 rounded-lg p-2 m-2 lg:mb-2.5 shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)] hover:transition hover:duration-300 hover:-translate-y-[10px]">
                     <div class="flex items-center border-b border-black pb-2.5">
-                        <span class="w-[30px] h-[30px] mr-2"><img src="${gameLogo}" onError="this.onerror=null;this.src='./assets/default-logo.png'" alt=" ${gameName} logo" class="h-full rounded-full"></span>
+                        <span class="w-[30px] h-[30px] mr-2"><img src="${gameLogo}" onError="this.onerror=null;this.src='./assets/default-logo.svg'" alt=" ${gameName} logo" class="h-full rounded-full"></span>
                         <h3 class="font-bold">${gameName}</h3>
                     </div>
                     <div class="my-2.5 mt-2.5 shadow-[2px_6px_8px_rgba(0,0,10,59%)]">
