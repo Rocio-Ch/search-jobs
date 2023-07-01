@@ -35,6 +35,7 @@ Para poder visualizar el proyecto simplemente colocá el siguiente enlace en tu 
 
 
 
+
 Preview del proyecto:
 Banner y menú de naveación
 ![Preview del portfolio](/assets/)
