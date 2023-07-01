@@ -35,7 +35,7 @@
                 <i class="fa-solid fa-bars" id="open-menu"></i>
                 <i class="fa-solid fa-xmark text-[1.2rem] hidden" id="close-menu"></i>
             </div>
-            <div id="nav-menu" class="h-full w-full flex flex-col items-end bg-black absolute top-14 left-0 hidden lg:flex lg:static">
+            <div id="nav-menu" class="h-full w-full flex flex-col items-end z-10 bg-black absolute top-14 left-0 hidden lg:flex lg:static">
                 <nav class="text-end px-2 z-10 pb-2.5 lg:px-0 lg:pb-0">
                     <ul class="items-baseline text-sm grid mr-1.5 lg:flex">
                         <a href="./index.html" class="hover:underline hover:underline-offset-4 hover:cursor-[url(./assets/mouse3.png),_pointer] mb-3.5 lg:mr-3.5"><li class="lg:mb-0"><i class="fa-solid fa-house hidden lg:inline lg:mr-1"></i> Home</li></a>
@@ -51,7 +51,7 @@
     <main class="flex flex-col grow">
         <!-- BANNER -->
         <section id="banner" class="flex flex-col items-center justify-center h-[300px] lg:h-[600px] bg-[url('./assets/grieta2.jpg')] bg-center bg-no-repeat bg-cover lg:bg-fixed bg-black ">
-            <div class="flex flex-col items-center justify-center hidden lg:flex">
+            <div class="flex flex-col items-center justify-center lg:flex">
                 <p class="text-[2rem] md:text-[3rem] p1 text-white font-bold lg:text-[6rem]">Work different</p>
                 <p class="text-[2rem] md:text-[3rem] p2 text-white font-bold lg:text-[6rem]">Have fun</p>
             </div>
@@ -90,7 +90,7 @@
             <div>
                 <span class="hidden loader"></span>
             </div>
-            <div id="jobs-container" class="lg:w-[85%] flex flex-wrap items-center justify-center">
+            <div id="jobs-container" class="w-[90%] lg:w-[85%] flex flex-wrap items-center justify-center">
             <!-- Render jobs -->
             </div>
         </section>
