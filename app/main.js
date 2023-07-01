@@ -3,6 +3,18 @@ const $$ = (selector) => document.querySelectorAll(selector)
 const setFocus = (selector) => $(selector).focus()
 const cleanContainer = (selector) => $(selector).innerHTML = ''
 
+const addClass = (selectors) => {
+    for (const selector of selectors) {
+        $(selector).classList.add("invisible")  
+    }
+}
+
+const removeClass = (selectors) => {
+    for (const selector of selectors) {
+        $(selector).classList.remove("invisible")  
+    }
+}
+
 const hideElements = (selectors) => {
     for (const selector of selectors) {
         $(selector).classList.add("hidden")
@@ -24,7 +36,7 @@ const removingBlur = (selectors) => {
     }
 }
 
-const StringToArray = (string) => string.split('.')
+const StringToArray = (string) => string.replaceAll('\n','').split('.')
 const arrayToString = (array) =>  array.join('.\n')
 
 
@@ -81,20 +93,20 @@ const deleteJob = (jobId) => {
 const saveJob = () => {
     return {
     "job": {
-        "area": $("#job-area").value,
-        "position": $("#job-position").value
+        "area": $("#job-area").value[0].toUpperCase() + $("#job-area").value.substring(1),
+        "position": $("#job-position").value[0].toUpperCase() + $("#job-position").value.substring(1)
         },
         "gameInfo": {
-            "gameName": $("#game-name").value,
+            "gameName": $("#game-name").value[0].toUpperCase() + $("#game-name").value.substring(1),
             "gameLogo": $("#game-logo").value
         },
         "salary": $("#job-salary").value,
-        "description": $("#job-description").value,
-        "responsabilities": $("#job-responsabilities").value,
+        "description": $("#job-description").value[0].toUpperCase() + $("#job-description").value.substring(1),
+        "responsabilities": $("#job-responsabilities").value[0].toUpperCase() + $("#job-responsabilities").value.substring(1),
         "image": $("#job-image").value,
-        "modality": $("#job-modality").value,
-        "workload": $("#job-workload").value,
-        "officeLocation": $("#job-location").value,
+        "modality": $("#job-modality").value[0].toUpperCase() + $("#job-modality").value.substring(1),
+        "workload": $("#job-workload").value[0].toUpperCase() + $("#job-workload").value.substring(1),
+        "officeLocation": $("#job-location").value[0].toUpperCase() + $("#job-location").value.substring(1),
         "requiredQualifications": StringToArray($("#job-qualifications").value),
         "perks": StringToArray($("#job-perks").value)
     }
@@ -145,6 +157,50 @@ const editedJobModal = () => {
         hideElements(["#modal-edited-job"])
         window.location.reload()
     }, 2000)
+}
+
+const validateStrField = (selector, minLength, invalidSelector) => {
+    const selectorValue = selector.value
+    if (selectorValue.length < minLength) {
+      removeClass([invalidSelector])
+      return false
+    } else {
+      addClass([invalidSelector])
+      return true
+    }
+  }
+
+  const validateNumberField = (selector, minLength, invalidSelector) => {
+      const selectorValue = selector.value
+      if (selectorValue < minLength) {
+        removeClass([invalidSelector])
+        return false
+      } else {
+        addClass([invalidSelector])
+        return true
+      }
+    }
+
+const validateForm = () => {
+    let fields = [
+        {'selector':$("#job-area"), 'invalidSelector':"#invalid-area", 'minLenght':2, 'validationFunction': validateStrField},
+        {'selector':$("#job-position"), 'invalidSelector':"#invalid-position", 'minLenght':3, 'validationFunction': validateStrField},
+        {'selector':$("#job-salary"), 'invalidSelector':"#invalid-salary", 'minLenght':1, 'validationFunction': validateNumberField},
+        {'selector':$("#job-modality"), 'invalidSelector':"#invalid-modality", 'minLenght':6, 'validationFunction': validateStrField},
+        {'selector':$("#job-location"), 'invalidSelector':"#invalid-location", 'minLenght':3, 'validationFunction': validateStrField},
+        {'selector':$("#job-workload"), 'invalidSelector':"#invalid-workload", 'minLenght':9, 'validationFunction': validateStrField},
+        {'selector':$("#game-name"), 'invalidSelector':"#invalid-gameName", 'minLenght':4, 'validationFunction': validateStrField},
+        {'selector':$("#job-description"), 'invalidSelector':"#invalid-description", 'minLenght':125, 'validationFunction': validateStrField},
+        {'selector':$("#job-responsabilities"), 'invalidSelector':"#invalid-responsabilities", 'minLenght':125, 'validationFunction': validateStrField},
+        
+    ]
+
+    isValid = true
+    for (const field of fields) {
+        ok = field.validationFunction(field.selector, field.minLenght, field.invalidSelector)        
+        isValid = isValid && ok
+    }
+    return isValid
 }
 
 
@@ -296,33 +352,34 @@ $("#hide-filters").addEventListener("click", () => {
     $(".filer-box-height").classList.toggle("lg:h-[100px]")
 })
 
-$("#job-salary").addEventListener("input", (e) => {
-    const salaryValue = e.target.valueAsNumber
-    if (isNaN(salaryValue)) {
-        $("#job-salary").value = ""
-    }
-})
-
 $("#add-job").addEventListener("click", () => {
     hideElements(["#filters", ".section-jobs", "#banner", "#details-job", "#nav-menu", "#close-menu"])
     showElements(["#section-form", "#open-menu"])
     window.scrollTo(0, 0)
     isSubmit = true
     setFocus("#job-area")
-    saveJob()
 })
 
 $("#form-job").addEventListener("submit", (e) => {
     e.preventDefault()
-    if (isSubmit) {
-        openCreatedJobModal()
-        registerJob()
-    } else {
-        editedJobModal()
-        const jobId = $("#edit-job-btn").getAttribute("data-id")
-        editJob(jobId)
+    if (validateForm()) {
+        if (isSubmit) {        
+            openCreatedJobModal()
+            registerJob()
+        } else {
+            editedJobModal()
+            const jobId = $("#edit-job-btn").getAttribute("data-id")
+            editJob(jobId)
+        }
+        $("#form-job").reset()
     }
-    $("#form-job").reset()
+})
+
+$("#job-salary").addEventListener("input", (e) => {
+    const salaryValue = e.target.valueAsNumber
+    if (isNaN(salaryValue)) {
+        $("#job-salary").value = ""
+    }
 })
 
 $("#delete-job-btn").addEventListener("click", () => {
@@ -391,17 +448,9 @@ $("#category-options").addEventListener("change", () => {
 })
 
 $("#clear-btn").addEventListener("click", () => {
-    let category = $("#filter-category").value
-    let option = $("#category-options").value
-
-    if (category) {
-        $("#filter-category").value = ""
-    }
-
-    if (option) {
-        $("#category-options").value = ""
-        cleanContainer("#category-options")
-    }
+    $("#filter-category").value = ""
+    $("#category-options").value = ""
+    cleanContainer("#category-options")
     getJobs()
 })
 
