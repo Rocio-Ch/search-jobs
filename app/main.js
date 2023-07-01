@@ -277,9 +277,13 @@ const renderDetailJob = (job) => {
     })
 
     let perksHTML = ''
-    perks.forEach(perk => {
-        perksHTML += `<li>${perk}</li>`
-    })
+    if (perks[0] === '') {
+        perksHTML += `<li>No benefits</li>`
+    } else {
+        perks.forEach(perk => {
+            perksHTML += `<li>${perk}</li>`
+        })
+    }
 
     $("#details-job-container").innerHTML = `
     <article class="flex flex-col justify-center items-center pt-[50px] pb-[30px] px-[30px] sm:w-[70%] lg:w-[60%] sm:self-center sm:border-l sm:border-black bg-transparent">
