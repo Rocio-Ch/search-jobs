@@ -1,6 +1,5 @@
-import { $, filters, Utils, Method, Render, filterJobs, Functions, Selectors } from './modules.js'
+import { $, filters, Utils, Method, Render, filterJobs, Functions, Selectors } from './module.js'
 
-/* EVENTS */
 $(Selectors.openBurguerMenu).addEventListener("click", () => {
     Utils.hideElements([Selectors.openBurguerMenu])
     Utils.showElements([Selectors.headerMenu, Selectors.closeBurguerMenu])
