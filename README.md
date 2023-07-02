@@ -27,7 +27,7 @@ La plataforma ofrece funciones como búsqueda personalizada de empleo mediante f
 - CSS3
 - Tailwind
 - JS - DOM / ARRAYS / OBJETOS
-- Asincronismo
+- mockAPI
 - Git
 - Github
 
