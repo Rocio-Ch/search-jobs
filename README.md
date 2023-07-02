@@ -1,4 +1,4 @@
-# AhorrADAs
+# Riot Jobs
 
 Soy Rocío Magalí Chaparro , estoy estudiando para convertirnos en desarrolladoras Frontend Developer y en esta ocasión les presento el tercer proyecto del último módulo de JavaScript en ADA ITW llamado: Search Jobs.
 
