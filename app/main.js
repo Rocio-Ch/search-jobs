@@ -195,8 +195,7 @@ const validateForm = () => {
         {'selector':$("#job-workload"), 'invalidSelector':"#invalid-workload", 'minLenght':9, 'validationFunction': validateStrField},
         {'selector':$("#game-name"), 'invalidSelector':"#invalid-gameName", 'minLenght':4, 'validationFunction': validateStrField},
         {'selector':$("#job-description"), 'invalidSelector':"#invalid-description", 'minLenght':125, 'validationFunction': validateStrField},
-        {'selector':$("#job-responsabilities"), 'invalidSelector':"#invalid-responsabilities", 'minLenght':125, 'validationFunction': validateStrField},
-        {'selector':$("#job-qualifications"), 'invalidSelector':"#invalid-qualifications", 'minLenght':125, 'validationFunction': validateStrField}
+        {'selector':$("#job-responsabilities"), 'invalidSelector':"#invalid-responsabilities", 'minLenght':50, 'validationFunction': validateStrField}
     ]
 
     isValid = true
@@ -272,9 +271,13 @@ const renderDetailJob = (job) => {
     const { job: { area, position }, gameInfo: { gameName }, salary, description, responsabilities, requiredQualifications, image, modality, workload, officeLocation, perks, id } = job
 
     let requiredQualificationsHTML = ''
-    requiredQualifications.forEach(req => {
-        requiredQualificationsHTML += `<li>${req}</li>`
-    })
+    if (requiredQualifications[0] === '') {
+        requiredQualificationsHTML += `<li>No required qualifications</li>`
+    } else {
+        requiredQualifications.forEach(req => {
+            requiredQualificationsHTML += `<li>${req}</li>`
+        })
+    }
 
     let perksHTML = ''
     if (perks[0] === '') {
