@@ -36,7 +36,7 @@ La plataforma ofrece funciones como búsqueda personalizada de empleo mediante f
 ### Ver el proyecto
 Para poder visualizar el proyecto simplemente colocá el siguiente enlace en tu navegador preferido:
 
-https://github.com/Rocio-Ch
+https://rocio-ch.github.io/search-jobs/
 
 
 Preview del proyecto:

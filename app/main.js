@@ -1,470 +1,124 @@
-const $ = (selector) => document.querySelector(selector)
-const $$ = (selector) => document.querySelectorAll(selector)
-const setFocus = (selector) => $(selector).focus()
-const cleanContainer = (selector) => $(selector).innerHTML = ''
-const scrollTop =  () =>  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-})
-
-const addClass = (selectors) => {
-    for (const selector of selectors) {
-        $(selector).classList.add("invisible")  
-    }
-}
-
-const removeClass = (selectors) => {
-    for (const selector of selectors) {
-        $(selector).classList.remove("invisible")  
-    }
-}
-
-const hideElements = (selectors) => {
-    for (const selector of selectors) {
-        $(selector).classList.add("hidden")
-    }
-}
-const showElements = (selectors) => {
-    for (const selector of selectors) {
-        $(selector).classList.remove("hidden")
-    }
-}
-const addingBlur = (selectors) => {
-    for (const selector of selectors) {
-        $(selector).style.filter = ("blur(1px)")
-    }
-}
-const removingBlur = (selectors) => {
-    for (const selector of selectors) {
-        $(selector).style.filter = ("blur(0px)")
-    }
-}
-
-const StringToArray = (string) => string.replaceAll('\n','').split('.')
-const arrayToString = (array) =>  array.join('.\n')
-
-
-const URL_BASE = "https://64876527beba62972790912f.mockapi.io/jobs/"
-let isSubmit = false
-let filterJobs = []
-
-const getJobs = (jobId = "") => {
-    fetch(`${URL_BASE}${jobId}`)
-        .then(res => res.json())
-        .then(jobs => {
-            if (jobId === "") {
-                filterJobs = jobs
-                renderJobs(jobs)
-                initializeFilters(jobs)
-            } else {
-                populateForm(jobs)
-            }
-        })
-}
-
-const getJobDetails = (jobId) => {
-    fetch(`${URL_BASE}${jobId}`)
-        .then(res => res.json())
-        .then(jobs => renderDetailJob(jobs))
-}
-
-const registerJob = () => {
-    fetch(`${URL_BASE}`, {
-        method: "POST",
-        headers: {
-            'Content-Type': 'Application/json'
-        },
-        body: JSON.stringify(saveJob())
-    })
-}
-
-const editJob = (jobId) => {
-    fetch(`${URL_BASE}${jobId}`, {
-        method: "PUT",
-        headers: {
-            'Content-Type': 'Application/json'
-        },
-        body: JSON.stringify(saveJob())
-    })
-}
-
-const deleteJob = (jobId) => {
-    fetch(`${URL_BASE}${jobId}`, {
-        method: "DELETE"
-    }).finally(() => window.location.reload())
-}
-
-const saveJob = () => {
-    return {
-    "job": {
-        "area": $("#job-area").value[0].toUpperCase() + $("#job-area").value.substring(1),
-        "position": $("#job-position").value[0].toUpperCase() + $("#job-position").value.substring(1)
-        },
-        "gameInfo": {
-            "gameName": $("#game-name").value[0].toUpperCase() + $("#game-name").value.substring(1),
-            "gameLogo": $("#game-logo").value
-        },
-        "salary": $("#job-salary").value,
-        "description": $("#job-description").value[0].toUpperCase() + $("#job-description").value.substring(1),
-        "responsabilities": $("#job-responsabilities").value[0].toUpperCase() + $("#job-responsabilities").value.substring(1),
-        "image": $("#job-image").value,
-        "modality": $("#job-modality").value[0].toUpperCase() + $("#job-modality").value.substring(1),
-        "workload": $("#job-workload").value[0].toUpperCase() + $("#job-workload").value.substring(1),
-        "officeLocation": $("#job-location").value[0].toUpperCase() + $("#job-location").value.substring(1),
-        "requiredQualifications": StringToArray($("#job-qualifications").value),
-        "perks": StringToArray($("#job-perks").value)
-    }
-}
-
-const populateForm = ({ job: { area, position }, gameInfo: { gameName, gameLogo }, salary, description, responsabilities, requiredQualifications, image, modality, workload, officeLocation, perks }) => {
-    $("#job-area").value = area
-    $("#job-image").value = image
-    $("#job-position").value = position
-    $("#job-salary").value = salary
-    $("#job-modality").value = modality
-    $("#job-location").value = officeLocation
-    $("#job-workload").value = workload
-    $("#game-name").value = gameName
-    $("#game-logo").value = gameLogo
-    $("#job-description").value = description
-    $("#job-responsabilities").value = responsabilities
-    $("#job-perks").value = arrayToString(perks)
-    $("#job-qualifications").value = arrayToString(requiredQualifications)
-}
-
-const editingJob = (jobId) => {
-    hideElements(["#filters", ".section-jobs", "#banner", "#details-job"])
-    showElements(["#section-form"])
-    scrollTop()
-    isSubmit = false
-    setFocus("#job-area")
-    getJobs(jobId)
-}
-
-const openDeleteModal = (id) => {
-    showElements(["#delete-job"])
-    $("#delete-job-btn").setAttribute("data-id", id)
-    addingBlur(["header", "main", "footer"])
-}
-
-const openCreatedJobModal = () => {
-    showElements(["#modal-added-job"])
-    setTimeout(() => {
-        hideElements(["#modal-added-job"])
-        window.location.reload()
-    }, 2000)
-}
-
-const editedJobModal = () => {
-    showElements(["#modal-edited-job"])
-    setTimeout(() => {
-        hideElements(["#modal-edited-job"])
-        window.location.reload()
-    }, 2000)
-}
-
-const validateStrField = (selector, minLength, invalidSelector) => {
-    const selectorValue = selector.value
-    if (selectorValue.length < minLength) {
-      removeClass([invalidSelector])
-      return false
-    } else {
-      addClass([invalidSelector])
-      return true
-    }
-  }
-
-  const validateNumberField = (selector, minLength, invalidSelector) => {
-      const selectorValue = selector.value
-      if (selectorValue < minLength) {
-        removeClass([invalidSelector])
-        return false
-      } else {
-        addClass([invalidSelector])
-        return true
-      }
-    }
-
-const validateForm = () => {
-    let fields = [
-        {'selector':$("#job-area"), 'invalidSelector':"#invalid-area", 'minLenght':2, 'validationFunction': validateStrField},
-        {'selector':$("#job-position"), 'invalidSelector':"#invalid-position", 'minLenght':3, 'validationFunction': validateStrField},
-        {'selector':$("#job-salary"), 'invalidSelector':"#invalid-salary", 'minLenght':1, 'validationFunction': validateNumberField},
-        {'selector':$("#job-modality"), 'invalidSelector':"#invalid-modality", 'minLenght':6, 'validationFunction': validateStrField},
-        {'selector':$("#job-location"), 'invalidSelector':"#invalid-location", 'minLenght':3, 'validationFunction': validateStrField},
-        {'selector':$("#job-workload"), 'invalidSelector':"#invalid-workload", 'minLenght':9, 'validationFunction': validateStrField},
-        {'selector':$("#game-name"), 'invalidSelector':"#invalid-gameName", 'minLenght':4, 'validationFunction': validateStrField},
-        {'selector':$("#job-description"), 'invalidSelector':"#invalid-description", 'minLenght':125, 'validationFunction': validateStrField},
-        {'selector':$("#job-responsabilities"), 'invalidSelector':"#invalid-responsabilities", 'minLenght':50, 'validationFunction': validateStrField}
-    ]
-
-    isValid = true
-    for (const field of fields) {
-        ok = field.validationFunction(field.selector, field.minLenght, field.invalidSelector)        
-        isValid = isValid && ok
-    }
-    return isValid
-}
-
-
-/* FILTERS */
-let filters = {}
-const initializeFilters = (jobs) => {
-    filters = {
-        "area": [],
-        "position": [],
-        "gameName": [],
-        "modality": [],
-        "officeLocation": [],
-        "workload": []
-    }
-    for (const { gameInfo: { gameName }, job: { position, area }, modality, workload, officeLocation } of jobs) {
-        Object.keys(filters).forEach((key) => {
-            if (!filters[key].includes(eval(key))) {
-                filters[key].push(eval(key))
-            }    
-         })
-    }
-}
-
-
-
-/* RENDERS */
-const renderJobs = (jobs) => {
-    cleanContainer("#jobs-container")
-    showElements([".loader"])
-    if (jobs) {
-        setTimeout(() => {
-            hideElements([".loader"])
-            for (const { gameInfo: { gameName, gameLogo }, image, job: { position }, description, modality, workload, officeLocation, id } of jobs) {
-                $("#jobs-container").innerHTML += `
-                <div class="card w-[290px] lg:w-[300px] bg-white border border-slate-500 rounded-lg p-2 m-2 lg:mb-2.5 shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)] hover:transition hover:duration-300 hover:-translate-y-[10px]">
-                    <div class="flex items-center border-b border-black pb-2.5">
-                        <span class="w-[30px] h-[30px] mr-2"><img src="${gameLogo}" onError="this.onerror=null;this.src='./assets/default-logo.svg'" alt=" ${gameName} logo" class="h-full rounded-full"></span>
-                        <h3 class="font-bold">${gameName}</h3>
-                    </div>
-                    <div class="my-2.5 mt-2.5 shadow-[2px_6px_8px_rgba(0,0,10,59%)]">
-                        <img src="${image}" onError="this.onerror=null;this.src='./assets/default-photo.jpg'" alt="concept art" class="h-[160px] w-full">
-                    </div>
-                    <div class="truncationText">
-                        <h4 class="font-bold text-lg my-1"><i class="fa-solid fa-briefcase mr-2"></i>${position}</h4>
-                        <p>${description}</p>
-                    </div>
-                    <div class="flex flex-wrap items-center py-5 border-b border-black mb-2.5">
-                        <span class="rounded text-[#eedada] bg-[#b90606ed] text-xs m-0.5 p-1">#${officeLocation}</span>
-                        <span class="rounded text-[#eedada] bg-[#b90606ed] text-xs m-0.5 p-1">#${workload}</span>
-                        <span class="rounded text-[#eedada] bg-[#b90606ed] text-xs m-0.5 p-1">#${modality}</span>
-                    </div>
-                    <button class="details-btn border border-transparent bg-[#0d0c0cf7] text-white py-1.5 px-4 rounded mt-2.5 mb-[11px] hover:cursor-[url(./assets/mouse3.png),_pointer] hover:shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)] hover:bg-gradient-to-r hover:from-[#9c0a0a] hover:to-[#dc2626]" data-id="${id}" onclick="getJobDetails('${id}')">Details<i class="fa-solid fa-angles-right text-xs ml-1"></i></button>
-                </div>
-                `
-            }
-        },1000)
-    }
-}
-
-const renderDetailJob = (job) => {
-    hideElements(["#banner", "#filters", ".section-jobs"])
-    showElements(["#details-job", ".spinner-container"])
-    setTimeout(() => {
-        hideElements([".spinner-container"])
-    const { job: { area, position }, gameInfo: { gameName }, salary, description, responsabilities, requiredQualifications, image, modality, workload, officeLocation, perks, id } = job
-
-    let requiredQualificationsHTML = ''
-    if (requiredQualifications[0] === '') {
-        requiredQualificationsHTML += `<li>No required qualifications</li>`
-    } else {
-        requiredQualifications.forEach(req => {
-            requiredQualificationsHTML += `<li>${req}</li>`
-        })
-    }
-
-    let perksHTML = ''
-    if (perks[0] === '') {
-        perksHTML += `<li>No benefits</li>`
-    } else {
-        perks.forEach(perk => {
-            perksHTML += `<li>${perk}</li>`
-        })
-    }
-
-    $("#details-job-container").innerHTML = `
-    <article class="flex flex-col justify-center items-center pt-[50px] pb-[30px] px-[30px] sm:w-[70%] lg:w-[60%] sm:self-center sm:border-l sm:border-black bg-transparent">
-        <div class="self-start sm:flex sm:flex-wrap sm:items-center">
-            <div class="w-[260px] sm:w-[300px] mb-2 sm:pr-2.5 sm:border-r sm:border-black">
-                <img class="" src="${image}" onError="this.onerror=null;this.src='./assets/default-photo.jpg'" alt="">
-            </div>
-            <ul class="sm:ml-2.5">
-                <li class="font-bold text-black mb-2.5">Area: <span class="text-[#b90606ed] mr-2">${area}</span></li>
-                <li class="font-bold text-black mb-2.5">Position: <span class="text-[#b90606ed] mr-2">${position}</span></li>
-                <li class="font-bold text-black mb-2.5">Game: <span class="text-[#b90606ed] mr-2">${gameName}</span></li>
-            </ul>
-        </div>
-        <div class="flex flex-col justify-center py-2.5">
-            <span class="font-bold text-black">Description:</span>
-            <p class="pb-2.5 mb-2.5 border-b border-black text-justify">${description}</p>
-            <span class="font-bold text-black">Responsabilities:</span>
-            <p class="pb-2.5 mb-2.5 border-b border-black text-justify">${responsabilities}</p>
-            <span class="font-bold text-black">Required qualifications:</span>
-            <ul class="border-b border-black pb-2.5 mb-2.5 px-[25px] list-disc">
-            ${requiredQualificationsHTML}
-            </ul>
-            <span class="font-bold text-black">Our perks:</span>
-            <ul class="border-b border-black pb-2.5 mb-2.5 px-[25px] list-disc">
-                ${perksHTML}
-            </ul>
-            <div class="sm:flex sm:flex-wrap border-b border-black pb-2.5">
-                <div class="mb-2.5 sm:mr-[80px] sm:mb-0">
-                    <div class="mb-2.5">
-                        <span><i class="fa-solid fa-house-laptop mr-1"></i>${modality}</span>
-                    </div>
-                    <div class="mb-2.5 sm:mb-0">
-                        <span><i class="fa-solid fa-dollar-sign mr-1"></i>${salary}</span>
-                    </div>
-                </div>
-                <div class="mb-2.5 sm:mr-[80px] sm:mb-0">
-                    <div class="mb-2.5">
-                        <span><i class="fa-regular fa-clock mr-1"></i>${workload}</span>
-                    </div>
-                    <div class="mb-2.5 sm:mb-0">
-                        <span><i class="fa-solid fa-location-dot mr-1"></i>${officeLocation}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex items-center justify-between flex-wrap">
-                <div class="w-[260px] mt-[30px] mr-2.5 flex justify-between">
-                    <button data-id="${id}" id="edit-job-btn" class="border border-transparent bg-[#0d0c0cf7] text-white py-2.5 px-12 rounded mt-2.5 mb-[11px] hover:cursor-[url(./assets/mouse3.png),_pointer] hover:bg-gradient-to-r hover:from-[#1a7780] hover:to-[#0a9907] hover:shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)]" onclick="editingJob('${id}')">Edit</button>
-                    <button data-id="${id}" id="modal-delete-job-btn" class="border border-transparent bg-[#0d0c0cf7] text-white py-2.5 px-12 rounded mt-2.5 mb-[11px] hover:cursor-[url(./assets/mouse3.png),_pointer] hover:bg-gradient-to-r hover:from-[#9c0a0a] hover:to-[#dc2626] hover:shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)]" onclick="openDeleteModal('${id}')"><i class="fa-solid fa-trash"></i></button>
-                </div>
-                <div class="mt-[30px]">
-                    <a href="./index.html" id="back-btn" class="border border-transparent bg-[#0d0c0cf7] text-white py-2.5 px-10 rounded mt-2.5 mb-[11px] hover:cursor-[url(./assets/mouse3.png),_pointer] hover:bg-gradient-to-r hover:bg-[#252423] hover:shadow-[-1px_7px_11px_-4px_rgba(0,0,0,75%)]"><i class="fa-solid fa-chevron-left mr-2"></i>Back</a>
-                </div>
-            </div>
-        </div>
-    </article>
-    `},2000)
-}
-
+import { $, filters, Utils, Method, Render, filterJobs, Functions, Selectors } from './modules.js'
 
 /* EVENTS */
-$("#open-menu").addEventListener("click", () => {
-    hideElements(["#open-menu"])
-    showElements(["#nav-menu", "#close-menu"])
+$(Selectors.openBurguerMenu).addEventListener("click", () => {
+    Utils.hideElements([Selectors.openBurguerMenu])
+    Utils.showElements([Selectors.headerMenu, Selectors.closeBurguerMenu])
 })
 
-$("#close-menu").addEventListener("click", () => {
-    hideElements(["#nav-menu", "#close-menu"])
-    showElements(["#open-menu"])
+$(Selectors.closeBurguerMenu).addEventListener("click", () => {
+    Utils.hideElements([Selectors.headerMenu, Selectors.closeBurguerMenu])
+    Utils.showElements([Selectors.openBurguerMenu])
 })
 
-$("#hide-filters").addEventListener("click", () => {
-    $(".filter-box").classList.toggle("hidden")
-    $(".filer-box-height").classList.toggle("lg:h-[100px]")
+$(Selectors.hideFilters).addEventListener("click", () => {
+    $(Selectors.filtersContainer).classList.toggle("hidden")
+    $(Selectors.heightFiltersBox).classList.toggle("lg:h-[100px]")
 })
 
-$("#add-job").addEventListener("click", () => {
-    hideElements(["#filters", ".section-jobs", "#banner", "#details-job", "#nav-menu", "#close-menu"])
-    showElements(["#section-form", "#open-menu"])
+$(Selectors.btnAddJob).addEventListener("click", () => {
+    Utils.hideElements([Selectors.sectionFilters, Selectors.sectionJobsContainer, Selectors.banner, Selectors.sectionDetailsJob, Selectors.headerMenu, Selectors.closeBurguerMenu])
+    Utils.showElements([Selectors.sectionJobForm, Selectors.openBurguerMenu])
     isSubmit = true
-    setFocus("#job-area")
+    Utils.setFocus(Selectors.inputArea)
 })
 
-$("#form-job").addEventListener("submit", (e) => {
+$(Selectors.addJobForm).addEventListener("submit", (e) => {
     e.preventDefault()
-    if (validateForm()) {
+    if (Functions.validateForm()) {
         if (isSubmit) {        
-            openCreatedJobModal()
-            registerJob()
+            Functions.openCreatedJobModal()
+            Method.registerJob()
         } else {
-            editedJobModal()
-            const jobId = $("#edit-job-btn").getAttribute("data-id")
-            editJob(jobId)
+            Functions.editedJobModal()
+            const jobId = $(Selectors.btnEditJob).getAttribute("data-id")
+            Method.editJob(jobId)
         }
-        $("#form-job").reset()
+        $(Selectors.addJobForm).reset()
     } else {
-        scrollTop()
+        Utils.scrollTop()
     }
 })
 
-$("#job-salary").addEventListener("input", (e) => {
+$(Selectors.inputSalary).addEventListener("input", (e) => {
     const salaryValue = e.target.valueAsNumber
     if (isNaN(salaryValue)) {
-        $("#job-salary").value = ""
+        $(Selectors.inputSalary).value = ""
     }
 })
 
-$("#delete-job-btn").addEventListener("click", () => {
-    removingBlur(["header", "main", "footer"])
-    const jobId = $("#delete-job-btn").getAttribute("data-id")
-    deleteJob(jobId)
+$(Selectors.btnDeleteJob).addEventListener("click", () => {
+    Utils.removingBlur([Selectors.header, Selectors.main, Selectors.footer])
+    const jobId = $(Selectors.btnDeleteJob).getAttribute("data-id")
+    Method.deleteJob(jobId)
 })
 
-$("#cancel-delete-job-btn").addEventListener("click", () => {
-    removingBlur(["header", "main", "footer"])
-    hideElements(["#delete-job"])
+$(Selectors.cancelDeleteJob).addEventListener("click", () => {
+    Utils.removingBlur([Selectors.header, Selectors.main, Selectors.footer])
+    Utils.hideElements([Selectors.openModalDeleteJob])
 })
 
-$("#filter-category").addEventListener("change", () => {
-    cleanContainer("#category-options")
-    let selectedCategory = $("#filter-category").value
-    options = filters[selectedCategory]
-    $("#category-options").innerHTML += `
+$(Selectors.selectFilterCategory).addEventListener("change", () => {
+    Utils.cleanContainer(Selectors.selectFilterOption)
+    let selectedCategory = $(Selectors.selectFilterCategory).value
+    let options = filters[selectedCategory]
+    $(Selectors.selectFilterOption).innerHTML += `
         <option value="">Select an option</option>
     `  
     for (const option of options) {
-        $("#category-options").innerHTML += `
+        $(Selectors.selectFilterOption).innerHTML += `
             <option value="${option}">${option}</option>
         `        
     }
 })
 
-$("#category-options").addEventListener("change", () => {
-    let option = $("#category-options").value
-    let selectedCategory = $("#filter-category").value
+$(Selectors.selectFilterOption).addEventListener("change", () => {
+    let option = $(Selectors.selectFilterOption).value
+    let selectedCategory = $(Selectors.selectFilterCategory).value
     if (selectedCategory == "area") {
         const result = filterJobs.filter(job => job.job.area == option)
-        renderJobs(result)
+        Render.renderJobs(result)
         return
     }
 
     if (selectedCategory == "position") {
         const result = filterJobs.filter(job => job.job.position == option)
-        renderJobs(result)
+        Render.renderJobs(result)
         return
     }  
 
     if (selectedCategory == "gameName") {
         const result = filterJobs.filter(job => job.gameInfo.gameName == option)
-        renderJobs(result)
+        Render.renderJobs(result)
         return
     }
 
     if (selectedCategory == "modality") {
         const result = filterJobs.filter(job => job.modality == option)
-        renderJobs(result)
+        Render.renderJobs(result)
         return
     }
 
     if (selectedCategory == "officeLocation") {
         const result = filterJobs.filter(job => job.officeLocation == option)
-        renderJobs(result)
+        Render.renderJobs(result)
         return
     }
 
     if (selectedCategory == "workload") {
         const result = filterJobs.filter(job => job.workload == option)
-        renderJobs(result)
+        Render.renderJobs(result)
         return
     }
 })
 
-$("#clear-btn").addEventListener("click", () => {
-    $("#filter-category").value = ""
-    $("#category-options").value = ""
-    cleanContainer("#category-options")
-    getJobs()
+$(Selectors.btnClearFilters).addEventListener("click", () => {
+    $(Selectors.selectFilterCategory).value = ""
+    $(Selectors.selectFilterOption).value = ""
+    Utils.cleanContainer(Selectors.selectFilterOption)
+    Method.getJobs()
 })
 
 window.addEventListener("load", () => {
-    getJobs()
+    Method.getJobs()
 })
